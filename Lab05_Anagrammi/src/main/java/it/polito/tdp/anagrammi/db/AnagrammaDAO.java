@@ -16,9 +16,13 @@ public class AnagrammaDAO {
 			ResultSet rs = st.executeQuery();
 			
 			if (rs.next()) {
+				rs.close();
+				st.close();
 				conn.close();
 				return true;
 			}else {
+				rs.close();
+				st.close();
 				conn.close();
 				return false;
 			}
