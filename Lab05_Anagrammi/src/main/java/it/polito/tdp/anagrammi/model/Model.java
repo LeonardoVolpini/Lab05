@@ -1,7 +1,7 @@
 package it.polito.tdp.anagrammi.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import it.polito.tdp.anagrammi.db.AnagrammaDAO;
 
@@ -13,13 +13,13 @@ public class Model {
 		this.anagrammaDAO= new AnagrammaDAO();
 	}
 
-	public List<String> anagrammi(String parola) {
-		List<String> risultato = new ArrayList<>();
+	public Set<String> anagrammi(String parola) {
+		Set<String> risultato = new HashSet<>();
 		permuta("",parola,0,risultato);
 		return risultato;
 	}
 	
-	private void permuta (String parziale, String lettere, int livello, List<String> risultato) {
+	private void permuta (String parziale, String lettere, int livello, Set<String> risultato) {
 		if (lettere.length()==0) { //caso terminale
 			risultato.add(parziale);
 		} else { //fai ricorsione
@@ -40,8 +40,8 @@ public class Model {
 		}
 	}
 	
-	public List<String> anagrammiCorretti (List<String> risultato) {
-		List<String> temp= new ArrayList<String>();
+	public Set<String> anagrammiCorretti (Set<String> risultato) {
+		Set<String> temp= new HashSet<String>();
 		for (String a : risultato) {
 			if (this.anagrammaDAO.isCorrect(a))
 				temp.add(a);
@@ -49,8 +49,8 @@ public class Model {
 		return temp;
 	}
 	
-	public List<String> anagrammiSbagliati (List<String> risultato) {
-		List<String> temp= new ArrayList<String>();
+	public Set<String> anagrammiSbagliati (Set<String> risultato) {
+		Set<String> temp= new HashSet<String>();
 		for (String a : risultato) {
 			if (this.anagrammaDAO.isCorrect(a)==false)
 				temp.add(a);

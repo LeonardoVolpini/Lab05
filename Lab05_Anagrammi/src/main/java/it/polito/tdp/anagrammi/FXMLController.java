@@ -3,6 +3,7 @@ package it.polito.tdp.anagrammi;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import it.polito.tdp.anagrammi.model.Model;
 import javafx.event.ActionEvent;
@@ -36,9 +37,9 @@ public class FXMLController {
     		this.txtAnCorr.setText("Inserire una parola della quale calcolare gli anagrammi");
     		return;
     	}
-    	List<String> anagrammi =this.model.anagrammi(parola);
-    	List<String> corretti=this.model.anagrammiCorretti(anagrammi);
-    	List<String> sbagliati= this.model.anagrammiSbagliati(anagrammi);
+    	Set<String> anagrammi =this.model.anagrammi(parola);
+    	Set<String> corretti=this.model.anagrammiCorretti(anagrammi);
+    	Set<String> sbagliati= this.model.anagrammiSbagliati(anagrammi);
     	if (corretti.isEmpty()) {
     		this.txtAnCorr.setText("Non ci sono anagrammi corretti di "+parola);
     		return;
@@ -70,7 +71,7 @@ public class FXMLController {
     	this.model=model;
     }
     
-    public String print (List<String> temp) {
+    public String print (Set<String> temp) {
     	String stampa="";
     	for (String s : temp)
     		stampa=stampa+s+"\n";
